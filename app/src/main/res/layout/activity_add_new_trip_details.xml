@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tripNameet" />
 
     <DatePicker
-        android:id="@+id/datePicker"
+        android:id="@+id/datePickerbox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/memberNumberet" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/memberNameet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -55,13 +55,21 @@
         android:inputType="textPersonName"
         android:hint="Enter Members Name"
         android:backgroundTint="@color/colorAccent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/addMemberbtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
+
+    <TextView
+        android:id="@+id/dateIs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/datePickerbox"
+        app:layout_constraintEnd_toEndOf="@+id/datePickerbox"
+        app:layout_constraintStart_toStartOf="@+id/datePickerbox" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addMemberbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -73,11 +81,11 @@
         android:background="@drawable/layout_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+        app:layout_constraintStart_toEndOf="@+id/memberNameet"
+        app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submitBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
@@ -86,5 +94,6 @@
         android:background="@drawable/layout_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/memberNameet" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
