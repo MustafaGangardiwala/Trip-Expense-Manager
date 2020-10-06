@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tripexpensemanager" >
+    package="com.example.tripexpensemanager">
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".HomeActivity"
+        android:theme="@style/AppTheme">
+        <activity android:name=".AddNewTripDetails"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HomeActivity"
             android:label="@string/home_activity_name"
-            android:theme="@style/AppThemeHomeActivity"/>
+            android:theme="@style/AppThemeHomeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
