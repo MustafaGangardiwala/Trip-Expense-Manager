@@ -6,20 +6,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +49,20 @@ public class HomeActivity extends AppCompatActivity {
 
         tripItemList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.list_add);
+
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        TextView temp = (TextView) view.findViewById(R.id.name);
+                        String str = temp.getText().toString();
+                        Intent intent = new Intent(HomeActivity.this, ViewTripDetails.class);
+                        intent.putExtra("Id", str);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+        );
         db.execSQL("CREATE TABLE IF NOT EXISTS Trip (Id INTEGER PRIMARY KEY AUTOINCREMENT ,Place TEXT NOT NULL, Date DATE NOT NULL, " + "MemberNo INTEGER NOT NULL DEFAULT 0);");
         Cursor cursor = db.rawQuery("SELECT * FROM Trip ORDER BY Date DESC;", null);
         if (cursor != null) {
@@ -65,6 +79,19 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new TripAdapter(getApplicationContext(), R.layout.list_info, tripItemList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        TextView temp = (TextView) view.findViewById(R.id.name);
+                        String str = temp.getText().toString();
+                        Intent intent = new Intent(HomeActivity.this, ViewTripDetails.class);
+                        intent.putExtra("Id", str);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+        );
 
         /////////////////////////////////////
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
