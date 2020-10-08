@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:background="@color/white"
     tools:context=".HomeActivity">
 
-<ListView
-    android:id="@+id/list_add"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="3dp"
-    android:divider="@color/white"
-    android:dividerHeight="8.0dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:background="@color/white"/>
+    <ListView
+        android:id="@+id/list_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:background="@color/white"
+        android:divider="@color/white"
+        android:dividerHeight="8.0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
