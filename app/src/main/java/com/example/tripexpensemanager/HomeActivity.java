@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tripexpensemanager.adapter.TripAdapter;
+import com.example.tripexpensemanager.addactivity.AddNewTripDetails;
+import com.example.tripexpensemanager.item.TripItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -48,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         db = openOrCreateDatabase("trip.db", Context.MODE_PRIVATE, null);
 
         tripItemList = new ArrayList<>();
-        listView = findViewById(R.id.list_add);
+        listView = findViewById(R.id.listviewTripInfo);
 
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -76,14 +79,16 @@ public class HomeActivity extends AppCompatActivity {
                     j++;
                 } while (cursor.moveToNext());
         }
-        adapter = new TripAdapter(getApplicationContext(), R.layout.list_info, tripItemList);
+
+        adapter = new TripAdapter(getApplicationContext(), R.layout.listview_trip_info, tripItemList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        TextView temp = (TextView) view.findViewById(R.id.nameInfo);
+                        TextView temp = (TextView) view.findViewById(R.id.name);
                         String str = temp.getText().toString();
                         Intent intent = new Intent(HomeActivity.this, ViewTripDetails.class);
                         intent.putExtra("Id", str);
@@ -93,7 +98,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
 
-        /////////////////////////////////////
         listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
@@ -162,7 +166,7 @@ public class HomeActivity extends AppCompatActivity {
         fb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent= new Intent(HomeActivity.this,AddNewTripDetails.class);
+                        Intent intent= new Intent(HomeActivity.this, AddNewTripDetails.class);
                         startActivity(intent);
                         finish();
                     }

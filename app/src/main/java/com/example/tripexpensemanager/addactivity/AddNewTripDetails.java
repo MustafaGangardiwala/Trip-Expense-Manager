@@ -1,4 +1,4 @@
-package com.example.tripexpensemanager;
+package com.example.tripexpensemanager.addactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tripexpensemanager.HomeActivity;
+import com.example.tripexpensemanager.R;
 
 import java.util.ArrayList;
 
@@ -39,11 +42,11 @@ public class AddNewTripDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_trip_details);
-        b1 = (Button) findViewById(R.id.submitBtn);
+        b1 = (Button) findViewById(R.id.adddataBtn);
         edtxt=(TextView) findViewById(R.id.dateIs);
         b2=(Button)findViewById(R.id.addMemberbtn);
         f_add=(EditText)findViewById(R.id.memberNameet);
-        num=(EditText)findViewById(R.id.memberNumberet);
+        num=(EditText)findViewById(R.id.amountEt);
         dp1 =(DatePicker)findViewById(R.id.datePickerbox);
         int selectedYear = dp1.getYear();
         int selectedMonth = dp1.getMonth();
@@ -74,8 +77,8 @@ public class AddNewTripDetails extends AppCompatActivity {
     }
 
     void OnClickButtonSubmit(){
-        e1=(EditText)findViewById(R.id.tripNameet);
-        e2=(EditText)findViewById(R.id.memberNumberet);
+        e1=(EditText)findViewById(R.id.paidinfoEt);
+        e2=(EditText)findViewById(R.id.amountEt);
         tv1=(TextView) findViewById(R.id.dateIs);
         b1.setOnClickListener(
                 new View.OnClickListener() {
@@ -163,7 +166,7 @@ public class AddNewTripDetails extends AppCompatActivity {
                             if (check < x) {
                                 db1 = openOrCreateDatabase("trip.db", Context.MODE_PRIVATE, null);
                                 String TABLE_NAME;
-                                e1 = (EditText) findViewById(R.id.tripNameet);
+                                e1 = (EditText) findViewById(R.id.paidinfoEt);
                                 TABLE_NAME = "Trip_" + e1.getText().toString().toUpperCase();
                                 try {
                                     Cursor c = db1.rawQuery("SELECT * FROM Trip ORDER BY Date DESC;", null);
