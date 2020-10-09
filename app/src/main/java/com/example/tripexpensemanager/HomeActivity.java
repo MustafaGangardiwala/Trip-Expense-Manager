@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ShowDataActivity();
-        fb=(FloatingActionButton)findViewById(R.id.fab);
+        fb= findViewById(R.id.fab);
         OnfabClick();
     }
 
@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         db = openOrCreateDatabase("trip.db", Context.MODE_PRIVATE, null);
 
         tripItemList = new ArrayList<>();
-        listView = (ListView) findViewById(R.id.list_add);
+        listView = findViewById(R.id.list_add);
 
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        TextView temp = (TextView) view.findViewById(R.id.name);
+                        TextView temp = (TextView) view.findViewById(R.id.nameInfo);
                         String str = temp.getText().toString();
                         Intent intent = new Intent(HomeActivity.this, ViewTripDetails.class);
                         intent.putExtra("Id", str);

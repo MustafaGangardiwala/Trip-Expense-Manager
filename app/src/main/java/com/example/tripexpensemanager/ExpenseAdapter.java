@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class TripAdapter extends ArrayAdapter<TripItem> {
+public class ExpenseAdapter extends ArrayAdapter<TripItem> {
     private SparseBooleanArray mSelectedItemsIds;
     private LayoutInflater inflater;
     private Context mContext;
     private List<TripItem> list;
 
-    public TripAdapter (Context context, int resourceId, List<TripItem> list) {
+    public ExpenseAdapter (Context context, int resourceId, List<TripItem> list) {
         super(context, resourceId, list);
         mSelectedItemsIds = new SparseBooleanArray();
         mContext = context;
@@ -35,9 +35,9 @@ public class TripAdapter extends ArrayAdapter<TripItem> {
         if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.expenselistview, null);
-            holder.name = (TextView) view.findViewById(R.id.nameInfo);
-            holder.note = (TextView) view.findViewById(R.id.note);
-            holder.amount = (TextView) view.findViewById(R.id.amount);
+            holder.name = view.findViewById(R.id.nameInfo);
+            holder.note = view.findViewById(R.id.note);
+            holder.amount = view.findViewById(R.id.amount);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
