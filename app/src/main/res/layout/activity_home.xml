@@ -8,7 +8,7 @@
     tools:context=".HomeActivity">
 
     <ListView
-        android:id="@+id/list_add"
+        android:id="@+id/listviewTripInfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="3dp"

@@ -1,4 +1,4 @@
-package com.example.tripexpensemanager;
+package com.example.tripexpensemanager.adapter;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;
@@ -8,65 +8,65 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.tripexpensemanager.R;
+import com.example.tripexpensemanager.item.TripItem;
+
 import java.util.List;
 
 public class TripAdapter extends ArrayAdapter<TripItem> {
-    private SparseBooleanArray mSelectedItemsIds;
+    private SparseBooleanArray mSelectedItems;
     private LayoutInflater inflater;
     private Context mContext;
-    private List<TripItem> list;
+    private List<TripItem> tripItemList;
 
-    public TripAdapter (Context context, int resourceId, List<TripItem> list) {
-        super(context, resourceId, list);
-        mSelectedItemsIds = new SparseBooleanArray();
+    public TripAdapter (Context context, int resourceId, List<TripItem> tripItemList) {
+        super(context, resourceId, tripItemList);
+        mSelectedItems = new SparseBooleanArray();
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        this.list = list;
+        this.tripItemList = tripItemList;
     }
 
     private static class ViewHolder {
         TextView name;
-        TextView note;
-        TextView amount;
+        TextView date;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.expenselistview, null);
-            holder.name = (TextView) view.findViewById(R.id.nameInfo);
-            holder.note = (TextView) view.findViewById(R.id.note);
-            holder.amount = (TextView) view.findViewById(R.id.amount);
+            view = inflater.inflate(R.layout.listview_trip_info, null);
+            holder.name = (TextView) view.findViewById(R.id.name);
+            holder.date = (TextView) view.findViewById(R.id.date);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.note.setText(list.get(position).getNote());
-        holder.amount.setText(list.get(position).getAmount());
-        holder.name.setText(list.get(position).getName());
+        holder.name.setText(tripItemList.get(position).getName());
+        holder.date.setText(tripItemList.get(position).getDate());
         return view;
     }
 
     @Override
-    public void remove(TripItem remitm) {
-        list.remove(remitm);
+    public void remove(TripItem tripItem) {
+        tripItemList.remove(tripItem);
         notifyDataSetChanged();
     }
 
     public void toggleSelection(int position) {
-        selectView(position, !mSelectedItemsIds.get(position));
+        selectView(position, !mSelectedItems.get(position));
     }
 
     public void selectView(int position, boolean value) {
         if (value)
-            mSelectedItemsIds.put(position, value);
+            mSelectedItems.put(position, value);
         else
-            mSelectedItemsIds.delete(position);
+            mSelectedItems.delete(position);
         notifyDataSetChanged();
     }
 
     public SparseBooleanArray getSelectedIds() {
-        return mSelectedItemsIds;
+        return mSelectedItems;
     }
 }

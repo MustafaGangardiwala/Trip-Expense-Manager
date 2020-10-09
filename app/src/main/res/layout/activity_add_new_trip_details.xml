@@ -5,95 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".AddNewTripDetails">
+    tools:context=".addactivity.AddNewTripDetails">
 
     <EditText
-        android:id="@+id/tripNameet"
+        android:id="@+id/paidinfoEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/colorAccent"
         android:ems="10"
+        android:hint="Trip Name"
         android:inputType="textPersonName"
         android:maxLength="24"
-        android:hint="Trip Name"
-        android:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/memberNumberet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:maxLength="3"
-        android:hint="Number of Members"
-        android:backgroundTint="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tripNameet" />
+        <EditText
+            android:id="@+id/amountEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorAccent"
+            android:ems="10"
+            android:hint="Number of Members"
+            android:inputType="numberDecimal"
+            android:maxLength="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paidinfoEt" />
 
-    <DatePicker
-        android:id="@+id/datePickerbox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberNumberet" />
+        <DatePicker
+            android:id="@+id/datePickerbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amountEt" />
 
-    <EditText
-        android:id="@+id/memberNameet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Enter Members Name"
-        android:backgroundTint="@color/colorAccent"
-        app:layout_constraintEnd_toStartOf="@+id/addMemberbtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
+        <EditText
+            android:id="@+id/memberNameet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorAccent"
+            android:ems="10"
+            android:hint="Enter Members Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/addMemberbtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
 
-    <TextView
-        android:id="@+id/dateIs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/datePickerbox"
-        app:layout_constraintEnd_toEndOf="@+id/datePickerbox"
-        app:layout_constraintStart_toStartOf="@+id/datePickerbox" />
+        <TextView
+            android:id="@+id/dateIs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/datePickerbox"
+            app:layout_constraintEnd_toEndOf="@+id/datePickerbox"
+            app:layout_constraintStart_toStartOf="@+id/datePickerbox" />
+
+        <Button
+            android:id="@+id/addMemberbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/layout_button"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Add Member"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/memberNameet"
+            app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
 
     <Button
-        android:id="@+id/addMemberbtn"
-        android:layout_width="wrap_content"
+        android:id="@+id/adddataBtn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Add Member"
-        android:textColor="@color/colorAccent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/layout_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/memberNameet"
-        app:layout_constraintTop_toBottomOf="@+id/datePickerbox" />
-
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
         android:text="Submit"
         android:textColor="@color/colorAccent"
-        android:background="@drawable/layout_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberNameet" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

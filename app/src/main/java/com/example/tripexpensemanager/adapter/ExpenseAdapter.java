@@ -1,4 +1,4 @@
-package com.example.tripexpensemanager;
+package com.example.tripexpensemanager.adapter;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;
@@ -8,20 +8,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.tripexpensemanager.R;
+import com.example.tripexpensemanager.item.ExpenseItem;
+
 import java.util.List;
 
-public class ExpenseAdapter extends ArrayAdapter<TripItem> {
+public class ExpenseAdapter extends ArrayAdapter<ExpenseItem> {
     private SparseBooleanArray mSelectedItemsIds;
     private LayoutInflater inflater;
     private Context mContext;
-    private List<TripItem> list;
+    private List<ExpenseItem> expenseItemList;
 
-    public ExpenseAdapter (Context context, int resourceId, List<TripItem> list) {
-        super(context, resourceId, list);
+    public ExpenseAdapter (Context context, int resourceId, List<ExpenseItem> expenseItemList) {
+        super(context, resourceId, expenseItemList);
         mSelectedItemsIds = new SparseBooleanArray();
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        this.list = list;
+        this.expenseItemList = expenseItemList;
     }
 
     private static class ViewHolder {
@@ -34,23 +37,23 @@ public class ExpenseAdapter extends ArrayAdapter<TripItem> {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.expenselistview, null);
+            view = inflater.inflate(R.layout.listview_expense_info, null);
             holder.name = view.findViewById(R.id.nameInfo);
-            holder.note = view.findViewById(R.id.note);
-            holder.amount = view.findViewById(R.id.amount);
+            holder.note = view.findViewById(R.id.paymentInfo);
+            holder.amount = view.findViewById(R.id.amountPaid);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.note.setText(list.get(position).getNote());
-        holder.amount.setText(list.get(position).getAmount());
-        holder.name.setText(list.get(position).getName());
+        holder.name.setText(expenseItemList.get(position).getName());
+        holder.note.setText(expenseItemList.get(position).getNote());
+        holder.amount.setText(expenseItemList.get(position).getAmount());
         return view;
     }
 
     @Override
-    public void remove(TripItem remitm) {
-        list.remove(remitm);
+    public void remove(ExpenseItem expenseItem) {
+        expenseItemList.remove(expenseItem);
         notifyDataSetChanged();
     }
 

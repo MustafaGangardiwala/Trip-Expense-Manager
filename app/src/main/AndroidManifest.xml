@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddNewExpense"></activity>
+        <activity android:name=".addactivity.AddNewExpense"></activity>
         <activity android:name=".ViewTripDetails" />
         <activity
-            android:name=".AddNewTripDetails"
+            android:name=".addactivity.AddNewTripDetails"
             android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"

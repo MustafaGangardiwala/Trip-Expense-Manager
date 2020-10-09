@@ -1,4 +1,4 @@
-package com.example.tripexpensemanager;
+package com.example.tripexpensemanager.addactivity;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.tripexpensemanager.R;
+import com.example.tripexpensemanager.ViewTripDetails;
 
 import java.util.ArrayList;
 
@@ -37,34 +40,29 @@ public class AddNewExpense extends AppCompatActivity {
         db=openOrCreateDatabase("trip.db", Context.MODE_PRIVATE, null);
         Intent in=getIntent();
         Bundle bundle=in.getExtras();
+        setTitle("New expense");
         p=bundle.getString("Id");
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        // onBackPressed();
-        setTitle("New expense");
         final String sp = "Trip_" + p;
-        Cursor c=db.rawQuery("SELECT * FROM "+sp+";",null);
-        if(c!=null) {
+        Cursor cursor=db.rawQuery("SELECT * FROM "+sp+";",null);
+        if(cursor!=null) {
             int i=0;
-            if(c.moveToFirst()){
+            if(cursor.moveToFirst()){
                 do{
-                    String d4=c.getString(c.getColumnIndex("Member"));
+                    String d4=cursor.getString(cursor.getColumnIndex("Member"));
                     names.add(d4);
                     i++;
-                }while(c.moveToNext());
+                }while(cursor.moveToNext());
             }
         }
-        spBusinessType = (Spinner) findViewById(R.id.spBussinessType);
-        adapterBusinessType = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, names);
+        spBusinessType = (Spinner) findViewById(R.id.nameSpinner);
+        adapterBusinessType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names);
         adapterBusinessType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spBusinessType.setAdapter(adapterBusinessType);
-        title=(EditText)findViewById(R.id.editTitle);
-        amount=(EditText)findViewById(R.id.editAmount);
-        btn_add=(Button)findViewById(R.id.button_ok);
+        title=(EditText)findViewById(R.id.paidinfoEt);
+        amount=(EditText)findViewById(R.id.amountEt);
+        btn_add=(Button)findViewById(R.id.adddataBtn);
         OnClickButtonAdd();
     }
 
@@ -88,12 +86,12 @@ public class AddNewExpense extends AppCompatActivity {
     }
 
     public void OnClickButtonAdd(){
-        final String s="Trip_"+p;
+        final String sp="Trip_"+p;
         btn_add.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        db.execSQL("create table if not exists " + p+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,Member TEXT,Note TEXT,Amount TEXT)");
+                        db.execSQL("CREATE TABLE IF NOT EXISTS " + p +" (Id INTEGER PRIMARY KEY AUTOINCREMENT,Member TEXT,Note TEXT,Amount TEXT)");
                         String COL_2="Member";
                         String COL_3="Note";
                         String COL_4="Amount";
@@ -101,34 +99,27 @@ public class AddNewExpense extends AppCompatActivity {
                         String am=amount.getText().toString();
                         String n = spBusinessType.getSelectedItem().toString();
                         String table=p;
-
-                        //EXCEPTION
                         try {
                             if (ti.matches("") || am.matches(""))
-                                throw new ArithmeticException("string");
+                                throw new ArithmeticException("Mismatched");
 
-                            //check if the note entered is previously entered in the table
-                            Cursor c1 = db.rawQuery("SELECT * FROM '" + p + "';", null);
-                            if (c1 != null) {
-                                Log.e("c1!=null", "ppppppppppp");
-                                if (c1.moveToFirst()) {
+
+                            Cursor cursor = db.rawQuery("SELECT * FROM '" + p + "';", null);
+                            if (cursor != null) {
+                                if (cursor.moveToFirst()) {
                                     do {
-                                        if (ti.matches(c1.getString(c1.getColumnIndex("Note"))) && n.matches(c1.getString(c1.getColumnIndex("Member")))) {
-                                            //update the value
-                                            int a = Integer.parseInt(c1.getString(c1.getColumnIndex("Amount")));
+                                        if (ti.matches(cursor.getString(cursor.getColumnIndex("Note"))) && n.matches(cursor.getString(cursor.getColumnIndex("Member")))) {
+                                            int a = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Amount")));
                                             a += Integer.parseInt(am);
                                             String t = String.valueOf(a);
-                                            int index=c1.getInt(c1.getColumnIndex("ID"));
-                                            db.execSQL("UPDATE '" + p + "' SET Amount = '" + a + "' WHERE ID ='" + index + "';");
+                                            int index=cursor.getInt(cursor.getColumnIndex("Id"));
+                                            db.execSQL("UPDATE '" + p + "' SET Amount = '" + a + "' WHERE Id ='" + index + "';");
                                             flag = 1;
-                                            Log.e(ti, String.valueOf(a));
                                             break;
                                         }
-                                    } while (c1.moveToNext());
+                                    } while (cursor.moveToNext());
                                 }
                             }
-
-
                             if (flag == 0) {
                                 ContentValues contentValues = new ContentValues();
                                 contentValues.put(COL_2, n);
@@ -136,59 +127,45 @@ public class AddNewExpense extends AppCompatActivity {
                                 contentValues.put(COL_4, am);
                                 long result = db.insert(table, null, contentValues);
                                 if (result != -1) {
-                                    //do
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(),"error data inserting",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
                                 }
                             }
+
                             flag = 0;
-
-                            //update
-
                             String tb = "Trip_" + p;
                             Cursor c = db.rawQuery("SELECT * FROM  " + tb + " ;", null);
                             if (c != null) {
                                 if (c.moveToFirst()) {
                                     do {
-
-                                        String ch = c.getString(c.getColumnIndex("friend"));
+                                        String ch = c.getString(c.getColumnIndex("Member"));
                                         if (ch.matches(n)) {
                                             String temp = c.getString(c.getColumnIndex("Amount"));
-                                            int index = c.getInt(c.getColumnIndex("ID"));
-                                            int money1 = Integer.parseInt(temp);
-                                            int money2 = Integer.parseInt(am);
-                                            int money = money1 + money2;
-                                            Log.e("money1",String.valueOf(money1));
-                                            Log.e("money2",String.valueOf(money2));
-                                            Log.e("money",String.valueOf(money));
-
-                                            db.execSQL("UPDATE '" + tb + "' SET Amount = '" + money + "' WHERE ID ='" + index + "';");
-
+                                            int index = c.getInt(c.getColumnIndex("Id"));
+                                            int mon1 = Integer.parseInt(temp);
+                                            int mon2 = Integer.parseInt(am);
+                                            int mon = mon1 + mon2;
+                                            db.execSQL("UPDATE '" + tb + "' SET Amount = '" + mon + "' WHERE Id ='" + index + "';");
                                             int x=c.getInt(c.getColumnIndex("Amount"));
-                                            Log.e("updated amount:::::::::",String.valueOf(x));
                                             c.moveToLast();
                                         }
                                     } while (c.moveToNext());
                                 }
                             }
 
-
-                            //update
-                            Toast.makeText(getApplicationContext(), "trip details updated!", Toast.LENGTH_SHORT).show();
-                            Intent newscreen = new Intent(getApplicationContext(), ViewTripDetails.class);
-                            newscreen.putExtra("Id", p);
-                            startActivity(newscreen);
+                            Toast.makeText(getApplicationContext(), "Trip Details Updated!!!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), ViewTripDetails.class);
+                            intent.putExtra("Id", p);
+                            startActivity(intent);
                             finish();
                         }catch (Exception e)
                         {
-                            Toast.makeText(getApplicationContext(),"EMPTY FIELDS",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Empty Fields",Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                 }
-
         );
         flag=0;
     }
