@@ -81,7 +81,7 @@ public class ViewTripDetails extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             if(position==0) return "Expense";
-            else if(position==1) return "Balense";
+            else if(position==1) return "Balance";
             else if(position==2) return "To paid";
             return null;
         }

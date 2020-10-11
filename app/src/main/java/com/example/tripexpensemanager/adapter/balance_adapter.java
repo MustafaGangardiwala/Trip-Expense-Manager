@@ -1,4 +1,4 @@
-package adapter;
+package com.example.tripexpensemanager.adapter;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;
@@ -8,24 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.tripexpensemanager.R;
+import com.example.tripexpensemanager.item.BalanceItem;
+
 import java.util.List;
 
-import app.msdeep14.tripcount.R;
-import items.balanceitem;
-
-/**
- * Created by hp15-p017tu on 25-07-2016.
- */
 
 
 
-public class balance_adapter extends ArrayAdapter<balanceitem> {
+
+
+
+public class balance_adapter extends ArrayAdapter<BalanceItem> {
     private SparseBooleanArray mSelectedItemsIds;
     private LayoutInflater inflater;
     private Context mContext;
-    private List<balanceitem> list;
+    private List<BalanceItem> list;
 
-    public balance_adapter (Context context, int resourceId, List<balanceitem> list) {
+    public balance_adapter(Context context, int resourceId, List<BalanceItem> list) {
         super(context, resourceId, list);
         mSelectedItemsIds = new SparseBooleanArray();
         mContext = context;
@@ -42,7 +42,7 @@ public class balance_adapter extends ArrayAdapter<balanceitem> {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.balance_listview_info, null);
+            view = inflater.inflate(R.layout.balance_listview, null);
             holder.name = (TextView) view.findViewById(R.id.name);
             holder.amount = (TextView) view.findViewById(R.id.amount);
             view.setTag(holder);
@@ -55,7 +55,7 @@ public class balance_adapter extends ArrayAdapter<balanceitem> {
     }
 
     @Override
-    public void remove(balanceitem remitm) {
+    public void remove(BalanceItem remitm) {
         list.remove(remitm);
         notifyDataSetChanged();
     }
