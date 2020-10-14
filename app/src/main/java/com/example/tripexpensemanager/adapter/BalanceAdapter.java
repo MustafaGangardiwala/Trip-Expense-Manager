@@ -19,13 +19,13 @@ import java.util.List;
 
 
 
-public class balance_adapter extends ArrayAdapter<BalanceItem> {
+public class BalanceAdapter extends ArrayAdapter<BalanceItem> {
     private SparseBooleanArray mSelectedItemsIds;
     private LayoutInflater inflater;
     private Context mContext;
     private List<BalanceItem> list;
 
-    public balance_adapter(Context context, int resourceId, List<BalanceItem> list) {
+    public BalanceAdapter(Context context, int resourceId, List<BalanceItem> list) {
         super(context, resourceId, list);
         mSelectedItemsIds = new SparseBooleanArray();
         mContext = context;

@@ -14,7 +14,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.tripexpensemanager.R;
-import com.example.tripexpensemanager.adapter.balance_adapter;
+import com.example.tripexpensemanager.adapter.BalanceAdapter;
 import com.example.tripexpensemanager.item.BalanceItem;
 
 import java.text.DecimalFormat;
@@ -106,12 +106,8 @@ public class FragmentBalance extends Fragment {
             String d2=df.format(p.money);
             list_items.add(new BalanceItem(d1,d2));
         }
-        balance_adapter adapter = new balance_adapter(getActivity(), R.layout.balance_listview, list_items);
+        BalanceAdapter adapter = new BalanceAdapter(getActivity(), R.layout.balance_listview, list_items);
         list_a.setAdapter(adapter);
-
-        for(calculate p : list){
-            Log.e(p.name,String.valueOf(p.money));
-        }
         return view;
     }
     public class calculate

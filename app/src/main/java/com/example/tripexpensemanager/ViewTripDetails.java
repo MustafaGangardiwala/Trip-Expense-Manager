@@ -12,7 +12,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.tripexpensemanager.fragmentui.FragmentBalance;
 import com.example.tripexpensemanager.fragmentui.FragmentExpense;
-import com.example.tripexpensemanager.fragmentui.FragmentSettle;
 
 public class ViewTripDetails extends AppCompatActivity {
 
@@ -55,7 +54,7 @@ public class ViewTripDetails extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
@@ -68,9 +67,6 @@ public class ViewTripDetails extends AppCompatActivity {
                 case 1:
                     Fragment f2=new FragmentBalance();
                     return FragmentBalance.newInstance(1,null);
-                case 2:
-                    Fragment f3=new FragmentBalance();
-                    return FragmentSettle.newInstance(2,null);
 
 
                 default:
@@ -82,7 +78,6 @@ public class ViewTripDetails extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             if(position==0) return "Expense";
             else if(position==1) return "Balance";
-            else if(position==2) return "To paid";
             return null;
         }
 
